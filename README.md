@@ -6,6 +6,9 @@ A hardware and firmware project designed to monitor and read temperature metrics
   <img src="Images/PCB_1.jpeg" alt="PCB Temperature Sensor Render" width="500">
 </p>
 
+<p align="center">
+  <img src="Images/Power_supply_1.jpeg" alt="Power Supply" width="500">
+</p>
 
 ## 🚀 Features
 - Real-time temperature tracking.
