@@ -32,6 +32,7 @@ A hardware and firmware project designed to monitor and read temperature metrics
 - **LiquidCrystal Adafruit:** v1.0.7
 
 ## Test
+Sensor 5 is in the ice, which is why the temperature is low. The test was conducted using all the sensors, with both ice and a thermal heater.
 
 <p align="center">
   <img src="Images/Test_1.png" alt="Temperature Sensor" width="500">
