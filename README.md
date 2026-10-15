@@ -2,7 +2,6 @@
 
 A hardware and firmware project designed to monitor and read temperature metrics directly on printed circuit boards (PCBs).
 
-<!-- PLACEMENT FOR BOARD IMAGE/RENDER -->
 <p align="center">
   <img src="Images/PCB_1.jpeg" alt="PCB Temperature Sensor Render" width="500">
 </p>
@@ -32,17 +31,19 @@ A hardware and firmware project designed to monitor and read temperature metrics
 - **MAX6675 Adafruit:** v1.1.2
 - **LiquidCrystal Adafruit:** v1.0.7
 
-## Testing
+## Test
 
-<!-- PLACEMENT FOR BOARD IMAGE/RENDER -->
 <p align="center">
   <img src="Images/Test_1.png" alt="Temperature Sensor" width="500">
 </p>
 
-<!-- PLACEMENT FOR SCHEMATIC IMAGE -->
 ## 📐 Schematic & Layout
 Below is the circuit diagram for this module:
 
-![Circuit Schematic](PCB_Design/PCB_V2.0.jpeg)
+<p align="center">
+  <img src="PCB_Design/PCB_V2.0.jpeg" alt="PCB" width="500">
+</p>
 
-![Circuit Schematic](Images/Power_supply_circuit.jpeg)
+<p align="center">
+  <img src="Images/Power_supply_circuit.jpeg" alt="PCB Power Circuit" width="500">
+</p>
