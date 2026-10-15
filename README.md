@@ -14,6 +14,7 @@ A hardware and firmware project designed to monitor and read temperature metrics
 ## Future Expansion
 - Overheating protection and safety alerts.
 - Sensor Correction on the TX pin
+- Add the sixth sensor
 
 ## 🛠️ Hardware & Tools
 - **EDA Software:** CorelDRAW
