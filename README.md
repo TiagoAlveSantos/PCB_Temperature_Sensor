@@ -41,6 +41,21 @@ Sensor 5 is in the ice, which is why the temperature is low. The test was conduc
   <img src="Images/Test_1.png" alt="Temperature Sensor" width="500">
 </p>
 
+## Graphic Panel (Python)
+- **Python 3:** v3.14.4
+- **PySerial:** v3.5
+- **Streamlit:** v1.66.0
+- **Plotly:** v7.1.0
+- **Pandas:** v3.0.6
+
+  ### How to execute Stremlit
+  Open the project folder, then execute in terminal (Linux)
+  - source venv/bin/activate
+  - pip install streamlit pyserial plotly pandas
+  - streamlit run app.py
+
+
+
 ## 📐 Schematic & Layout
 Below is the circuit diagram for this module:
 
