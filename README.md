@@ -13,11 +13,14 @@ A hardware and firmware project designed to monitor and read temperature metrics
 ## 🚀 Features
 - Real-time temperature tracking.
 - Design created for an Arduino Mega 2560.
+- Overheating protection and safety alerts.
 
 ## Future Expansion
-- Overheating protection and safety alerts.
 - Add the sixth sensor
 - Share the same SPI bus pins
+- One Start Button
+- One Reset Button
+- Improve the Graphic Panel
 
 ## Identified Problems:
 - **Code Upload:** To upload the code to the arduino, it's necessary to remove the PCB Shield.
@@ -26,7 +29,7 @@ A hardware and firmware project designed to monitor and read temperature metrics
 ## 🛠️ Hardware & Tools
 - **EDA Software:** CorelDRAW
 - **Arduino IDE V2:** v2.3.10 
-- **Core Components:** MAX6675 v2.0, Arduino Mega 2560, ACS712, L7805CV
+- **Core Components:** MAX6675 v2.0, Arduino Mega 2560, ACS712, L7805CV, 2-Channel 30A 5V Relay Module with Optocoupler (High/Low Level Trigger)
 - **Firmware Language:** C / C++ (Arduino Framework)
 - **Printing PCB:** Bambu Lab H2D with Laser 40w, Ferric Chloride
 
@@ -53,7 +56,6 @@ Sensor 5 is in the ice, which is why the temperature is low. The test was conduc
   - source venv/bin/activate
   - pip install streamlit pyserial plotly pandas
   - streamlit run app.py
-
 
 
 ## 📐 Schematic & Layout
