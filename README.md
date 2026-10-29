@@ -14,17 +14,19 @@ A hardware and firmware project designed to monitor and read temperature metrics
 - Real-time temperature tracking.
 - Design created for an Arduino Mega 2560.
 - Overheating protection and safety alerts.
+- Start Button (with reset)
 
 ## Future Expansion
-- Add the sixth sensor
-- Share the same SPI bus pins
-- One Start Button
-- One Reset Button
-- Improve the Graphic Panel
+- Share the same SPI bus pins.
+- LED Indicator.
+- Improve the Graphic Panel.
+- Make a Python system portable/executable in a simple way.
 
 ## Identified Problems:
 - **Code Upload:** To upload the code to the arduino, it's necessary to remove the PCB Shield.
 - **Pin TX:** In the diagram, the Sensor_01 SCK is incorrectly connected to the Arduino TX pin (though in the code, it has been assigned to pin 4).
+- **Pin OUT:** In the diagram, the Sensor ACS712 is incorrectly connected to the Arduino TX1/18 (though in the code, it has been assigned to pin A13)
+- **Dual power supply for Arduino:** The Arduino was being powered by an external power supply via the VIN pin, as well as through the USB port. **The external power supply connected to the VIN pin has been removed.**
 
 ## 🛠️ Hardware & Tools
 - **EDA Software:** CorelDRAW
