@@ -14,11 +14,14 @@ A hardware and firmware project designed to monitor and read temperature metrics
 - Real-time temperature tracking.
 - Design created for an Arduino Mega 2560.
 - Overheating protection and safety alerts.
-- Start Button (with reset)
+- Start Button (with reset).
+- LED Indicator.
+  - RED: Standby
+  - GREEN: On
+  - BLUE: Current Surge / Emergency
 
 ## Future Expansion
 - Share the same SPI bus pins.
-- LED Indicator.
 - Improve the Graphic Panel.
 - Make a Python system portable/executable in a simple way.
 
