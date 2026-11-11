@@ -32,9 +32,7 @@ bool sistemaLigado = false;
 bool estadoBotaoAnterior = HIGH;
 bool leituraBotao = HIGH;
 float tempResistencia = 0.0;
-float celsius = 0.0;
-float somaLeituras = 0;
-int numeroAmostras = 10;
+float corrente = 0.0;
 
 // Variáveis para controle do tempo sem travamento (millis)
 //unsigned long tempoAnterior = 0;
@@ -106,29 +104,9 @@ void atualizaLED(){
 }
 
 void lerSensores() {
-  somaLeituras = 0;
-  delay(2);
-
-  // Leitura do Sensor de Corrente ACS712 (20A) no pino A13
-  for (int i = 0; i < numeroAmostras; i++) {
-    somaLeituras += analogRead(pinoSensorCorrente);
-    delay(3); // Pequeno atraso de 2ms para estabilizar o conversor AD
-  }
-
-  // Tira a média aritmética das 10 leituras
-  float mediaAnalogica = somaLeituras / (float)numeroAmostras;
-
-  // Converte a leitura (0 a 1023) para Tensão (0 a 5V)
-  float tensao = (mediaAnalogica * 5.0) / 1023.0;
-  
-  // Fórmula específica para o ACS712 de 20A (sensibilidade de 100mV/A ou 0.100 V/A)
-  float corrente = (tensao - 2.5) / 0.100; 
-  if (corrente < 0) corrente = 0; // Remove ruídos negativos leves
-
-  if (corrente >= 2.5) {
-    falhaCorrente = true; // Ativa o travamento de segurança!
-    sistemaLigado = false;
-  }
+  float celsius = 0.0;
+  delay (1);
+  lerCorrente();
 
   // Percorre todos os sensores enviando os valores em uma única linha
   for (int i = 0; i < numSensors; i++) {
@@ -150,6 +128,56 @@ void lerSensores() {
   
   Serial.print(corrente, 2);
   Serial.println();
+}
+
+void lerCorrente() {
+  float somaQuadrados = 0;
+  int numeroAmostras = 40;
+  // Variável estática para manter o histórico da última corrente e suavizar a leitura (Filtro)
+  static float correnteSuavizada = 0.0;
+  delay(1);
+
+  for (int i = 0; i < numeroAmostras; i++) {
+    int leituraBruta = analogRead(pinoSensorCorrente);
+
+    // Converte a leitura (0 a 1023) para Tensão (0 a 5V)
+    float tensao = (leituraBruta * 5.0) / 1023.0;
+
+    // Subtrai o offset central de 2.5V para isolar apenas a onda AC oscilante
+    float tensaoAC = tensao - 2.5;
+
+    // Ignora micro-ruídos abaixo de um limiar muito baixo perto do zero
+    if (abs(tensaoAC) < 0.03) {
+      tensaoAC = 0;
+    }
+
+    // Eleva ao quadrado para acumular no cálculo RMS
+    somaQuadrados += (tensaoAC * tensaoAC);
+    
+    delay(1); // Pequeno atraso entre as amostras
+  }
+    
+  // Calcula a tensão RMS (raiz da média dos quadrados)
+  float tensaoRMS = sqrt(somaQuadrados / (float)numeroAmostras);
+  
+  // Converte a Tensão RMS para Corrente RMS usando a sensibilidade do ACS712-20A (0.100 V/A)
+  float correnteInstantanea = tensaoRMS / 0.100;
+
+  // --- FILTRO DE SUAVIZAÇÃO (Média Exponencial) ---
+  // O valor 0.3 controla a velocidade da resposta. Quanto menor (ex: 0.1 ou 0.2), 
+  // mais estável fica o número, ignorando picos rápidos de ruído.
+  correnteSuavizada = (correnteInstantanea * 0.3) + (correnteSuavizada * 0.7);
+
+  if (correnteSuavizada < 0.1) {
+    corrente = 0; 
+  } else {
+    corrente = correnteSuavizada;
+  }
+
+  if (corrente >= 4.0) {
+    falhaCorrente = true; // Ativa o travamento de segurança!
+    sistemaLigado = false;
+  }
 }
 
 void controleSegurancaRele() {
